@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <title>Hinggi.id</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Free HTML Templates" name="keywords">
+    <meta content="Free HTML Templates" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"> 
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Page Header Start -->
+    <!-- Topbar -->
+    <div id="topbar-placeholder"></div>
+    <script>
+        fetch('../partials/user/topbar.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('topbar-placeholder').innerHTML = data;
+            });
+    </script>
+
+    <!-- Container untuk Navbar + Konten -->
+    <div class="container-fluid mb-5">
+        <div class="row border-top px-xl-5" id="navbar-row">
+            <!-- Navbar dan konten akan di-load via JS -->
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk memuat halaman ke dalam dashboard-placeholder
+        function loadPage(page) {
+            const container = document.querySelector('#dashboard-placeholder');
+            if (container) {
+                fetch('./pages/' + page)
+                    .then(res => {
+                        if (!res.ok) throw new Error('Halaman tidak ditemukan');
+                        return res.text();
+                    })
+                    .then(data => {
+                        container.innerHTML = data;
+                        window.scrollTo(0, 0); // scroll ke atas
+                    })
+                    .catch(err => {
+                        container.innerHTML = `<div class="alert alert-danger">Gagal memuat halaman: ${page}</div>`;
+                        console.error(err);
+                    });
+            }
+        }
+    
+        // Load navbar + dashboard layout
+        Promise.all([
+            fetch('../partials/user/navbar-vertical.html').then(res => res.text()),
+            fetch('../partials/user/navbar-horizontal.html').then(res => res.text())
+        ])
+        .then(([vertical, horizontal]) => {
+            document.getElementById('navbar-row').innerHTML = `
+                <div class="col-lg-2 d-none d-lg-block">${vertical}</div>
+                <div class="col-lg-10">
+                    ${horizontal}
+                    <div class="card p-3 mt-3" id="dashboard-placeholder">
+                        <!-- konten akan dimuat di sini -->
+                    </div>
+                </div>
+            `;
+    
+            // Setelah layout tampil, muat landing page
+            loadPage('landing-page.html');
+        })
+        .catch(err => console.error('Gagal memuat layout:', err));
+    </script>
+    
+
+    <!-- Page Header End -->
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+    <script>
+        fetch('../partials/user/footer.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            });
+    </script>
+    
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="mail/jqBootstrapValidation.min.js"></script>
+    <script src="mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

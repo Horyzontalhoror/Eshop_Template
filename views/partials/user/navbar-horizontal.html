@@ -1,0 +1,31 @@
+<!-- Gunakan w-100 agar full dalam col-lg-10 -->
+<nav class="navbar navbar-expand-lg bg-light navbar-light py-2 w-100 shadow-sm mb-3">
+    <a href="#" class="navbar-brand d-lg-none">
+        <h4 class="m-0 font-weight-bold">
+            <span class="text-primary border px-2 mr-1">Hinggi</span>.id
+        </h4>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+        <div class="navbar-nav mr-auto">
+            <a href="#" class="nav-item nav-link" onclick="loadPage('../pages/landing-page.html')">Home</a>
+            <a href="#" class="nav-item nav-link " onclick="loadPage('../pages/shop.html')">Shop</a>
+            <a href="#" class="nav-item nav-link" onclick="loadPage('../pages/detail.html')">Detail</a>
+            <div class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                <div class="dropdown-menu rounded-0 m-0">
+                    <a href="#" class="dropdown-item" onclick="loadPage('../pages/cart.html')">Shopping Cart</a>
+                    <a href="#" class="dropdown-item" onclick="loadPage('../pages/checkout.html')">Checkout</a>
+                </div>
+            </div>
+            <a href="#" class="nav-item nav-link" onclick="loadPage('../pages/contact.html')">Contact</a>
+        </div>
+        <div class="navbar-nav ml-auto">
+            <a href="/views/auth/auth.html" class="nav-item nav-link">Login</a>
+            <a href="/views/admin/admin.html" class="nav-item nav-link">Admin</a>
+        </div>
+    </div>
+</nav>
